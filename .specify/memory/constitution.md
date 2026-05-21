@@ -1,50 +1,99 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: template-draft -> 1.0.0
+- Modified principles:
+	- Placeholder Principle 1 -> I. Spec-Driven Delivery
+	- Placeholder Principle 2 -> II. Independent Value Slices
+	- Placeholder Principle 3 -> III. Risk-Based Verification (NON-NEGOTIABLE)
+	- Placeholder Principle 4 -> IV. Observability as a Feature
+	- Placeholder Principle 5 -> V. Secure and Reversible Change
+- Added sections:
+	- Engineering Constraints
+	- Delivery Workflow & Quality Gates
+- Removed sections:
+	- None
+- Templates requiring updates:
+	- .specify/templates/plan-template.md: ✅ updated
+	- .specify/templates/spec-template.md: ✅ updated
+	- .specify/templates/tasks-template.md: ✅ updated
+	- .specify/templates/commands/*.md: ⚠ pending (directory not present)
+- Follow-up TODOs:
+	- None
+-->
+
+# WebInteractor Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Delivery
+Every feature MUST begin with a written specification that defines user stories,
+functional requirements, measurable success criteria, and explicit assumptions.
+Implementation work MUST trace to approved specification artifacts.
+Rationale: shared intent reduces rework and prevents accidental scope drift.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Independent Value Slices
+Work MUST be organized into independently testable user stories where each story
+can deliver user-visible value on its own. Plans and tasks MUST preserve story-level
+independence and avoid cross-story coupling unless explicitly justified.
+Rationale: independent slices enable faster validation, safer rollout, and
+incremental delivery.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Risk-Based Verification (NON-NEGOTIABLE)
+All behavior changes MUST include automated verification at the highest-value
+layer for the risk involved (unit, integration, or contract). Bug fixes MUST
+include a regression test unless technically impossible; exceptions MUST be
+documented in the plan's Complexity Tracking section.
+Rationale: verification depth must match risk while keeping delivery practical.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Observability as a Feature
+New or changed workflows MUST emit actionable diagnostics (structured logs,
+error context, and clear failure signals) sufficient for triage without
+reproducing the issue locally. Operationally significant flows MUST define
+basic success/failure signals in specification or quickstart artifacts.
+Rationale: maintainability and incident response depend on first-class visibility.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Secure and Reversible Change
+Changes MUST follow least-privilege and fail-safe defaults, and they MUST define
+a rollback or recovery path for high-impact behavior changes. Secrets MUST never
+be committed, and security-relevant assumptions MUST be stated explicitly.
+Rationale: safe iteration requires both prevention (secure defaults) and recovery
+(reversibility).
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Engineering Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Plans MUST document language/runtime version and primary dependencies.
+- Performance or resource constraints MUST be captured when relevant to user value.
+- Interfaces that affect other components MUST include explicit contract notes.
+- Any intentional complexity increase MUST include a rejected simpler alternative.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Delivery Workflow & Quality Gates
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Constitution Check in plan artifacts MUST pass before Phase 0 research and be
+	revalidated after Phase 1 design.
+- Specifications MUST include edge cases and assumptions before planning begins.
+- Tasks MUST be grouped by user story and include paths for all implementation
+	and validation work.
+- Pull requests MUST confirm constitution compliance, test evidence, and operational
+	impact notes for changed behavior.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes conflicting local conventions for specification,
+planning, and execution workflows.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendment process:
+1. Propose a constitution change in a dedicated pull request.
+2. Include rationale, impacted templates, and migration guidance.
+3. Obtain maintainer approval before merge.
+
+Versioning policy:
+- MAJOR: Removal or incompatible redefinition of a principle or governance rule.
+- MINOR: New principle/section or materially expanded mandatory guidance.
+- PATCH: Clarifications, wording improvements, and non-semantic edits.
+
+Compliance review expectations:
+- Every plan MUST document Constitution Check outcomes.
+- Every task set MUST reflect verification and operational impact work where applicable.
+- Reviewers MUST block merges that violate NON-NEGOTIABLE requirements.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-21 | **Last Amended**: 2026-05-21

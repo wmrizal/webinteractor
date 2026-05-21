@@ -40,7 +40,16 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] Spec-driven delivery: Spec includes user stories, measurable success criteria,
+  edge cases, and assumptions.
+- [ ] Independent value slices: Plan structure preserves independently deliverable
+  user stories.
+- [ ] Risk-based verification: Required automated tests are identified by risk
+  level (unit/integration/contract).
+- [ ] Observability: Logging, diagnostics, and success/failure signals are defined
+  for changed workflows.
+- [ ] Secure and reversible change: Security assumptions and rollback/recovery path
+  are documented for high-impact changes.
 
 ## Project Structure
 
