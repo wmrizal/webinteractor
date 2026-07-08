@@ -1,4 +1,4 @@
 <!-- SPECKIT START -->
-For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+Current active plan: specs/001-browser-feature-toggle/plan.md
+Use this plan for technology choices, structure, commands, and constraints.
 <!-- SPECKIT END -->

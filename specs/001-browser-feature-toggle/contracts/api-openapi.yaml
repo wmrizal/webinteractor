@@ -1,0 +1,299 @@
+openapi: 3.0.3
+info:
+  title: Browser Feature Toggle Automation API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8000
+paths:
+  /targets:
+    get:
+      summary: List automation targets
+      responses:
+        '200':
+          description: Target list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutomationTarget'
+    post:
+      summary: Create automation target
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTargetRequest'
+      responses:
+        '201':
+          description: Target created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationTarget'
+  /targets/{targetId}:
+    get:
+      summary: Get automation target
+      parameters:
+        - $ref: '#/components/parameters/TargetId'
+      responses:
+        '200':
+          description: Target details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationTarget'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update automation target
+      parameters:
+        - $ref: '#/components/parameters/TargetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTargetRequest'
+      responses:
+        '200':
+          description: Target updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationTarget'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete automation target
+      parameters:
+        - $ref: '#/components/parameters/TargetId'
+      responses:
+        '204':
+          description: Target deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /runs:
+    post:
+      summary: Trigger automation run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRunRequest'
+      responses:
+        '202':
+          description: Run accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationRun'
+  /runs/{runId}:
+    get:
+      summary: Get automation run details
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      responses:
+        '200':
+          description: Run details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunDetails'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /targets/{targetId}/runs:
+    get:
+      summary: List recent runs for a target
+      parameters:
+        - $ref: '#/components/parameters/TargetId'
+      responses:
+        '200':
+          description: Recent run list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutomationRun'
+components:
+  parameters:
+    TargetId:
+      name: targetId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    RunId:
+      name: runId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    AutomationTarget:
+      type: object
+      required: [id, name, baseUrl, extractionRules, toggleRule, defaultDesiredState]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        baseUrl:
+          type: string
+          format: uri
+        pagePath:
+          type: string
+        extractionRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapturedItemRule'
+        toggleRule:
+          $ref: '#/components/schemas/ToggleControlRule'
+        defaultDesiredState:
+          type: string
+          enum: [on, off]
+    CreateTargetRequest:
+      type: object
+      required: [name, baseUrl, extractionRules, toggleRule, defaultDesiredState]
+      properties:
+        name:
+          type: string
+        baseUrl:
+          type: string
+          format: uri
+        pagePath:
+          type: string
+        extractionRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapturedItemRule'
+        toggleRule:
+          $ref: '#/components/schemas/ToggleControlRule'
+        defaultDesiredState:
+          type: string
+          enum: [on, off]
+    UpdateTargetRequest:
+      allOf:
+        - $ref: '#/components/schemas/CreateTargetRequest'
+    CapturedItemRule:
+      type: object
+      required: [key, selector]
+      properties:
+        key:
+          type: string
+        selector:
+          type: string
+    ToggleControlRule:
+      type: object
+      required: [controlSelector, stateSelector, verificationMethod]
+      properties:
+        controlSelector:
+          type: string
+        stateSelector:
+          type: string
+        verificationMethod:
+          type: string
+          enum: [dom-attribute, text-label, aria-checked]
+    CreateRunRequest:
+      type: object
+      required: [targetId, requestedState]
+      properties:
+        targetId:
+          type: string
+          format: uuid
+        requestedState:
+          type: string
+          enum: [on, off]
+    AutomationRun:
+      type: object
+      required: [id, targetId, requestedState, status, startedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        targetId:
+          type: string
+          format: uuid
+        requestedState:
+          type: string
+          enum: [on, off]
+        status:
+          type: string
+          enum: [queued, running, success, failed, no-change-needed]
+        startedAt:
+          type: string
+          format: date-time
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+        durationMs:
+          type: integer
+          nullable: true
+    RunDetails:
+      allOf:
+        - $ref: '#/components/schemas/AutomationRun'
+        - type: object
+          properties:
+            capturedItems:
+              type: array
+              items:
+                $ref: '#/components/schemas/CapturedItem'
+            toggleResult:
+              $ref: '#/components/schemas/ToggleResult'
+            failureStep:
+              type: string
+              enum: [navigate, authenticate, extract, toggle, verify]
+              nullable: true
+            failureMessage:
+              type: string
+              nullable: true
+    CapturedItem:
+      type: object
+      required: [key, selector, value, capturedAt]
+      properties:
+        key:
+          type: string
+        selector:
+          type: string
+        value:
+          type: string
+        capturedAt:
+          type: string
+          format: date-time
+    ToggleResult:
+      type: object
+      required: [stateBefore, stateAfter, actionTaken, verified]
+      properties:
+        stateBefore:
+          type: string
+          enum: [on, off, unknown]
+        stateAfter:
+          type: string
+          enum: [on, off, unknown]
+        actionTaken:
+          type: string
+          enum: [none, toggle-once, retry-toggle]
+        verified:
+          type: boolean
+    ErrorResponse:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
