@@ -12,11 +12,11 @@
 
 **Purpose**: Initialize project structure and baseline tooling.
 
-- [ ] T001 Create backend and frontend folder skeleton in backend/src and frontend/src
-- [ ] T002 Initialize backend project dependencies and tooling in backend/requirements.txt and backend/pyproject.toml
-- [ ] T003 [P] Initialize frontend project dependencies and scripts in frontend/package.json
-- [ ] T004 [P] Add environment templates in backend/.env.example and frontend/.env.example
-- [ ] T005 [P] Configure linting and formatting in backend/pyproject.toml and frontend/eslint.config.js
+- [X] T001 Create backend and frontend folder skeleton in backend/src and frontend/src
+- [X] T002 Initialize backend project dependencies and tooling in backend/requirements.txt and backend/pyproject.toml
+- [X] T003 [P] Initialize frontend project dependencies and scripts in frontend/package.json
+- [X] T004 [P] Add environment templates in backend/.env.example and frontend/.env.example
+- [X] T005 [P] Configure linting and formatting in backend/pyproject.toml and frontend/eslint.config.js
 
 ---
 
@@ -26,14 +26,14 @@
 
 **CRITICAL**: No user story tasks should start until this phase is complete.
 
-- [ ] T006 Implement database base models and session management in backend/src/models/base.py and backend/src/lib/db.py
-- [ ] T007 Implement SQLite initialization and migration bootstrap in backend/src/lib/migrations.py
-- [ ] T008 Create API app factory, routing registration, and middleware chain in backend/src/main.py and backend/src/api/app.py
-- [ ] T009 [P] Implement structured logging and run event schema in backend/src/observability/logging.py and backend/src/observability/events.py
-- [ ] T010 [P] Implement API error mapping and consistent error responses in backend/src/api/errors.py
-- [ ] T011 [P] Implement frontend API client and request error handling in frontend/src/services/apiClient.ts
-- [ ] T012 [P] Create contract test harness and API fixtures in backend/tests/contract/conftest.py
-- [ ] T013 [P] Create integration test fixture target page setup in backend/tests/integration/fixtures/test_target_page.py
+- [X] T006 Implement database base models and session management in backend/src/models/base.py and backend/src/lib/db.py
+- [X] T007 Implement SQLite initialization and migration bootstrap in backend/src/lib/migrations.py
+- [X] T008 Create API app factory, routing registration, and middleware chain in backend/src/main.py and backend/src/api/app.py
+- [X] T009 [P] Implement structured logging and run event schema in backend/src/observability/logging.py and backend/src/observability/events.py
+- [X] T010 [P] Implement API error mapping and consistent error responses in backend/src/api/errors.py
+- [X] T011 [P] Implement frontend API client and request error handling in frontend/src/services/apiClient.ts
+- [X] T012 [P] Create contract test harness and API fixtures in backend/tests/contract/conftest.py
+- [X] T013 [P] Create integration test fixture target page setup in backend/tests/integration/fixtures/test_target_page.py
 
 **Checkpoint**: Foundation is ready for user story implementation.
 
@@ -47,18 +47,18 @@
 
 ### Tests for User Story 1
 
-- [ ] T014 [P] [US1] Add contract tests for target CRUD endpoints in backend/tests/contract/test_targets_api.py
-- [ ] T015 [P] [US1] Add frontend integration test for target form and target list behavior in frontend/tests/integration/targets.spec.ts
+- [X] T014 [P] [US1] Add contract tests for target CRUD endpoints in backend/tests/contract/test_targets_api.py
+- [X] T015 [P] [US1] Add frontend integration test for target form and target list behavior in frontend/tests/integration/targets.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T016 [P] [US1] Implement AutomationTarget model and persistence mapping in backend/src/models/automation_target.py
-- [ ] T017 [P] [US1] Implement extraction and toggle rule validators in backend/src/models/rules.py
-- [ ] T018 [US1] Implement target service for create/update/delete/list logic in backend/src/services/target_service.py
-- [ ] T019 [US1] Implement target API routes in backend/src/api/routes/targets.py
-- [ ] T020 [US1] Implement target management page in frontend/src/pages/TargetsPage.tsx
-- [ ] T021 [US1] Implement target form and validation UI in frontend/src/components/targets/TargetForm.tsx
-- [ ] T022 [US1] Implement target query and mutation hooks in frontend/src/features/targets/useTargets.ts
+- [X] T016 [P] [US1] Implement AutomationTarget model and persistence mapping in backend/src/models/automation_target.py
+- [X] T017 [P] [US1] Implement extraction and toggle rule validators in backend/src/models/rules.py
+- [X] T018 [US1] Implement target service for create/update/delete/list logic in backend/src/services/target_service.py
+- [X] T019 [US1] Implement target API routes in backend/src/api/routes/targets.py
+- [X] T020 [US1] Implement target management page in frontend/src/pages/TargetsPage.tsx
+- [X] T021 [US1] Implement target form and validation UI in frontend/src/components/targets/TargetForm.tsx
+- [X] T022 [US1] Implement target query and mutation hooks in frontend/src/features/targets/useTargets.ts
 
 **Checkpoint**: User Story 1 is independently functional and testable.
 

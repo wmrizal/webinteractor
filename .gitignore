@@ -21,6 +21,9 @@ dist/
 build/
 coverage/
 htmlcov/
+data/
+playwright-report/
+test-results/
 
 # Environment
 .env
