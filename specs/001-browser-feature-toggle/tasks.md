@@ -72,19 +72,19 @@
 
 ### Tests for User Story 2
 
-- [ ] T023 [P] [US2] Add contract tests for run trigger and run detail endpoints in backend/tests/contract/test_runs_api.py
-- [ ] T024 [P] [US2] Add backend integration test for browser automation success and no-change paths in backend/tests/integration/test_run_automation_flow.py
-- [ ] T025 [P] [US2] Add frontend integration test for run trigger and state selection in frontend/tests/integration/run-execution.spec.ts
+- [X] T023 [P] [US2] Add contract tests for run trigger and run detail endpoints in backend/tests/contract/test_runs_api.py
+- [X] T024 [P] [US2] Add backend integration test for browser automation success and no-change paths in backend/tests/integration/test_run_automation_flow.py
+- [X] T025 [P] [US2] Add frontend integration test for run trigger and state selection in frontend/tests/integration/run-execution.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T026 [P] [US2] Implement AutomationRun and CapturedItem models in backend/src/models/automation_run.py and backend/src/models/captured_item.py
-- [ ] T027 [P] [US2] Implement ToggleResult model in backend/src/models/toggle_result.py
-- [ ] T028 [US2] Implement Playwright browser runner for navigate-extract-toggle-verify flow in backend/src/automation/browser_runner.py
-- [ ] T029 [US2] Implement run orchestration service with terminal state transitions in backend/src/services/run_service.py
-- [ ] T030 [US2] Implement run API routes in backend/src/api/routes/runs.py
-- [ ] T031 [US2] Implement run execution page with desired state controls in frontend/src/pages/RunPage.tsx
-- [ ] T032 [US2] Implement frontend run action hooks and status polling in frontend/src/features/runs/useRunActions.ts
+- [X] T026 [P] [US2] Implement AutomationRun and CapturedItem models in backend/src/models/automation_run.py and backend/src/models/captured_item.py
+- [X] T027 [P] [US2] Implement ToggleResult model in backend/src/models/toggle_result.py
+- [X] T028 [US2] Implement Playwright browser runner for navigate-extract-toggle-verify flow in backend/src/automation/browser_runner.py
+- [X] T029 [US2] Implement run orchestration service with terminal state transitions in backend/src/services/run_service.py
+- [X] T030 [US2] Implement run API routes in backend/src/api/routes/runs.py
+- [X] T031 [US2] Implement run execution page with desired state controls in frontend/src/pages/RunPage.tsx
+- [X] T032 [US2] Implement frontend run action hooks and status polling in frontend/src/features/runs/useRunActions.ts
 
 **Checkpoint**: User Story 2 is independently functional and testable.
 
@@ -98,16 +98,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T033 [P] [US3] Add backend integration test for failure diagnostics and failure-step capture in backend/tests/integration/test_run_failure_diagnostics.py
-- [ ] T034 [P] [US3] Add frontend integration test for run history and run details rendering in frontend/tests/integration/run-history.spec.ts
+- [X] T033 [P] [US3] Add backend integration test for failure diagnostics and failure-step capture in backend/tests/integration/test_run_failure_diagnostics.py
+- [X] T034 [P] [US3] Add frontend integration test for run history and run details rendering in frontend/tests/integration/run-history.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T035 [US3] Implement run event persistence for step-level diagnostics in backend/src/observability/run_event_store.py
-- [ ] T036 [US3] Implement run history query service in backend/src/services/run_history_service.py
-- [ ] T037 [US3] Implement run history and detailed diagnostics API routes in backend/src/api/routes/run_history.py
-- [ ] T038 [US3] Implement run history page in frontend/src/pages/RunHistoryPage.tsx
-- [ ] T039 [US3] Implement run details diagnostics panel component in frontend/src/components/runs/RunDetailsPanel.tsx
+- [X] T035 [US3] Implement run event persistence for step-level diagnostics in backend/src/observability/run_event_store.py
+- [X] T036 [US3] Implement run history query service in backend/src/services/run_history_service.py
+- [X] T037 [US3] Implement run history and detailed diagnostics API routes in backend/src/api/routes/run_history.py
+- [X] T038 [US3] Implement run history page in frontend/src/pages/RunHistoryPage.tsx
+- [X] T039 [US3] Implement run details diagnostics panel component in frontend/src/components/runs/RunDetailsPanel.tsx
 
 **Checkpoint**: User Story 3 is independently functional and testable.
 
@@ -117,11 +117,11 @@
 
 **Purpose**: Improve reliability, security posture, and operational readiness across stories.
 
-- [ ] T040 [P] Update operational usage and troubleshooting guide in specs/001-browser-feature-toggle/quickstart.md
-- [ ] T041 Implement log redaction and secret-safe diagnostics in backend/src/observability/logging.py and backend/src/services/run_service.py
-- [ ] T042 [P] Add integration test for toggle reversal workflow in backend/tests/integration/test_toggle_reversal.py
-- [ ] T043 Add integration performance smoke test for concurrent manual runs in backend/tests/integration/test_run_concurrency.py
-- [ ] T044 Run quickstart validation and record evidence notes in specs/001-browser-feature-toggle/quickstart.md
+- [X] T040 [P] Update operational usage and troubleshooting guide in specs/001-browser-feature-toggle/quickstart.md
+- [X] T041 Implement log redaction and secret-safe diagnostics in backend/src/observability/logging.py and backend/src/services/run_service.py
+- [X] T042 [P] Add integration test for toggle reversal workflow in backend/tests/integration/test_toggle_reversal.py
+- [X] T043 Add integration performance smoke test for concurrent manual runs in backend/tests/integration/test_run_concurrency.py
+- [X] T044 Run quickstart validation and record evidence notes in specs/001-browser-feature-toggle/quickstart.md
 
 ---
 

@@ -11,9 +11,10 @@ from src.models.base import DesiredState
 
 
 def create_target_record(target_page_url: str) -> UUID:
+    target_name = "Checkout flag on" if "-on.html" in target_page_url else "Checkout flag off"
     with Session(get_engine()) as session:
         record = AutomationTargetRecord(
-            name="Checkout flag",
+            name=target_name,
             base_url=target_page_url,
             page_path="",
             auth_profile=None,

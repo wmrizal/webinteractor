@@ -69,3 +69,26 @@ Frontend tests:
 Contract tests:
 - `cd backend`
 - `pytest tests/contract`
+
+Integration tests:
+- `cd backend`
+- `pytest tests/integration`
+
+## 8) Troubleshooting
+
+| Symptom | Cause | Resolution |
+|---------|-------|-----------|
+| Run status stuck at `running` | Playwright browser not installed | Run `python -m playwright install chromium` |
+| `404` on `/targets/{id}` | Target UUID does not exist | Check target list via `GET /targets` |
+| Toggle state after run differs from requested | Page element selectors changed | Update extraction rules and toggle selectors on target |
+| Run status `failed` with `failureStep=navigate` | Page URL unreachable or timeout | Confirm `baseUrl` and `pagePath` are correct HTTPS URLs |
+| Frontend cannot reach API | `VITE_API_BASE_URL` misconfigured | Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/.env` |
+| Secrets appearing in logs | Misconfigured env vars | Never put secrets in log messages; use env injection |
+
+## 9) Validation Evidence
+
+- Backend contract tests: all targets API and runs API tests passing.
+- Backend integration tests: US1 CRUD, US2 success and no-change paths, US3 failure diagnostics passing.
+- Backend toggle reversal test: on → off → on round-trip passing.
+- Frontend integration tests: targets page, run execution page, and run history page tests passing.
+- Quickstart walkthrough validated against local SQLite `data/app.db` instance.

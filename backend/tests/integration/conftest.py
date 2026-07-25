@@ -9,8 +9,6 @@ from sqlmodel import SQLModel, Session, delete
 from src.lib.db import get_engine, init_db, reset_engine_cache
 from src.main import app
 
-pytest_plugins = ["tests.integration.fixtures.test_target_page"]
-
 
 @pytest.fixture()
 def integration_client(tmp_path, monkeypatch: pytest.MonkeyPatch) -> Iterator[TestClient]:

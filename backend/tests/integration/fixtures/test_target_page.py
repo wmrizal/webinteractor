@@ -42,3 +42,19 @@ def target_page_file(tmp_path: Path) -> Path:
 @pytest.fixture()
 def target_page_url(target_page_file: Path) -> str:
     return target_page_file.resolve().as_uri()
+
+
+@pytest.fixture()
+def target_page_factory(tmp_path: Path):
+  def _build(initial_state: str = "off") -> str:
+    normalized_state = "on" if initial_state == "on" else "off"
+    aria_checked = "true" if normalized_state == "on" else "false"
+    customized_html = textwrap.dedent(TARGET_PAGE_HTML).replace(
+      '<p id="feature-state" aria-checked="false">off</p>',
+      f'<p id="feature-state" aria-checked="{aria_checked}">{normalized_state}</p>',
+    )
+    page_path = tmp_path / f"target-page-{normalized_state}.html"
+    page_path.write_text(customized_html.strip(), encoding="utf-8")
+    return page_path.resolve().as_uri()
+
+  return _build

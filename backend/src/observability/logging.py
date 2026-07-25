@@ -3,10 +3,23 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 from typing import Any
 
 LOG_FORMAT = "%(message)s"
 _DEFAULT_LEVEL = "INFO"
+
+_SECRET_PATTERNS = [
+    re.compile(r"(?i)(password|passwd|secret|token|apikey|api_key|authorization)\s*[=:]\s*\S+"),
+    re.compile(r"(?i)Bearer\s+\S+"),
+]
+_REDACTION_PLACEHOLDER = "[REDACTED]"
+
+
+def _redact(value: str) -> str:
+    for pattern in _SECRET_PATTERNS:
+        value = pattern.sub(lambda m: m.group(0).split("=")[0] + "=" + _REDACTION_PLACEHOLDER, value)
+    return value
 
 
 class StructuredFormatter(logging.Formatter):
@@ -14,7 +27,7 @@ class StructuredFormatter(logging.Formatter):
         payload: dict[str, Any] = {
             "level": record.levelname,
             "logger": record.name,
-            "message": record.getMessage(),
+            "message": _redact(record.getMessage()),
         }
 
         if hasattr(record, "event"):
